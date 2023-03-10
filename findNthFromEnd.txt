@@ -1,0 +1,57 @@
+
+
+#include <iostream>
+
+using namespace std;
+
+struct Node{
+
+   
+    int data;
+    Node* next;
+
+};
+
+Node* findNthFromEnd(Node* head, int n){
+    Node* first = head;
+    Node* second =head;
+    
+    for(int i =0; i<n; i++){
+        if(second == NULL){
+            return NULL;
+        }
+        second = second ->next;
+    }
+    
+    while(second != NULL){
+        first = first -> next;
+        second = second -> next;
+    }
+    return first;
+}
+int main()
+{
+    Node* head  = new Node();
+    head ->data = 1;
+    Node* temp = head;
+    for(int i =2; i<=6; i++){
+        Node* node = new Node();
+        node -> data = i;
+        temp -> next = node;
+        temp = temp -> next;
+    }
+    
+    temp -> next = NULL;
+    
+    int N =4;
+    
+    Node* result = findNthFromEnd(head, N);
+    if(result == NULL){
+        cout<< "N is greater than length of linked list"<<endl;
+    }
+   else{
+       cout<<result->data<<endl;
+   }
+
+    return 0;
+}
